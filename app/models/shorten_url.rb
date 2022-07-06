@@ -6,6 +6,10 @@ class ShortenUrl < ApplicationRecord
 
   before_validation :generate_slug
 
+  def short_url
+    Rails.application.routes.url_helpers.short_url(slug: slug)
+  end
+
   private
 
   def generate_slug

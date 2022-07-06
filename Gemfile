@@ -7,9 +7,8 @@ ruby '2.7.3'
 gem 'rails', '~> 6.1.5', '>= 6.1.5.1'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
-gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 5.0'
-gem 'turbolinks', '~> 5'
+gem 'active_model_serializers'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
