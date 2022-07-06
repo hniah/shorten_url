@@ -6,11 +6,7 @@ module Api
     end
 
     def decode
-      regexp = Regexp.new("^#{request.base_url}/(\\w+)")
-      result = url_param.match(regexp)
-      raise ApiError::NotFound if result.nil?
-
-      shorten_url = ShortenUrl.find_by_slug!(result[1])
+      shorten_url = ShortenUrl.find_by_slug!(parse_slug)
       render_json(data: ShortenUrlSerializer.new(shorten_url))
     end
 
@@ -18,6 +14,17 @@ module Api
 
     def url_param
       params.require(:url)
+    end
+
+    def parse_slug
+      regexp = Regexp.new("^#{host_url}/(\\w+)")
+      result = url_param.match(regexp)
+      raise ApiError::InvalidShortenUrl if result.nil?
+      result[1]
+    end
+
+    def host_url
+      Rails.application.routes.default_url_options[:host]
     end
   end
 end

@@ -4,3 +4,6 @@ en:
       not_found:
         code: 404
         message: 'Not found'
+      invalid_shorten_url:
+        code: 1000
+        message: 'Short url is invalid'
