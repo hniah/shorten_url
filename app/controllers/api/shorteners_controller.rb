@@ -6,6 +6,12 @@ module Api
     end
 
     def decode
+      regexp = Regexp.new("^#{request.base_url}/(\\w+)")
+      result = url_param.match(regexp)
+      raise ApiError::NotFound if result.nil?
+
+      shorten_url = ShortenUrl.find_by_slug!(result[1])
+      render_json(data: ShortenUrlSerializer.new(shorten_url))
     end
 
     private
