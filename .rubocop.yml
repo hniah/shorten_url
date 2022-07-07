@@ -1,0 +1,49 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+
+Metrics/BlockLength:
+  IgnoredMethods: ['describe', 'context', 'included']
+
+Layout/LineLength:
+  Max: 120
+  
+Metrics/ClassLength:
+  Max: 250
+
+AllCops:
+  Exclude:
+    - db/schema.rb
+    - db/migrate/*.rb
+    - bin/bundle
+    - Gemfile
+    - Rakefile
+    - Gemfile.lock
+    - node_modules/**/*
+    - config/**/*
+    - config.ru
+    - bin/**/*
+    - spec/rails_helper.rb
+    - spec/spec_helper.rb
+  TargetRailsVersion: 6.1
+  TargetRubyVersion: 2.7
+  NewCops: enable
+  SuggestExtensions: false
+
+Rails:
+  Enabled: true
+
+Rails/SkipsModelValidations:
+  Exclude:
+    - 'spec/**/*_spec.rb'
+
+Lint/RedundantCopDisableDirective:
+  Enabled: false
+  AutoCorrect: false
+
+Lint/UnusedMethodArgument:
+  Enabled: true
+  AutoCorrect: false
+
+Documentation:
+  Enabled: false
