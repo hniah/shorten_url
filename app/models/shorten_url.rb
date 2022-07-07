@@ -1,7 +1,9 @@
-class ShortenUrl < ApplicationRecord
-  ALPHA_NUMBER = ([*("a".."z"),*("A".."Z"),*("0".."9")]).freeze
+# frozen_string_literal: true
 
-  validates :original_url, presence: true, format: URI::regexp(%w[http https])
+class ShortenUrl < ApplicationRecord
+  ALPHA_NUMBER = [*('a'..'z'), *('A'..'Z'), *('0'..'9')].freeze
+
+  validates :original_url, presence: true, format: URI::DEFAULT_PARSER.make_regexp(%w[http https])
   validates :slug, presence: true, uniqueness: true
 
   before_validation :generate_slug

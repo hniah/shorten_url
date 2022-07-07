@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Api::ShortenersController, type: :controller do
@@ -12,6 +14,7 @@ describe Api::ShortenersController, type: :controller do
 
     context 'With a valid url' do
       let(:original_url) { 'https://guides.rubyonrails.org/active_record_basics.html#the-active-record-pattern' }
+
       it 'is success' do
         do_request(original_url)
         result = JSON.parse(response.body).with_indifferent_access
@@ -32,12 +35,14 @@ describe Api::ShortenersController, type: :controller do
 
   describe '#decode' do
     let!(:shorten_url) { create :shorten_url }
+
     def do_request(url)
       post :decode, params: { url: url }
     end
 
     context 'With a valid url' do
       let(:url) { shorten_url.short_url }
+
       it 'is success' do
         do_request(url)
         result = JSON.parse(response.body).with_indifferent_access

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExceptionHandler
   def listening_exception
     yield

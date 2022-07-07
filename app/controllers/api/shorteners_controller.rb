@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   class ShortenersController < BaseController
     def encode
@@ -6,7 +8,7 @@ module Api
     end
 
     def decode
-      shorten_url = ShortenUrl.find_by_slug!(parse_slug)
+      shorten_url = ShortenUrl.find_by!(slug: parse_slug)
       render_json(data: ShortenUrlSerializer.new(shorten_url))
     end
 
@@ -20,6 +22,7 @@ module Api
       regexp = Regexp.new("^#{host_url}/(\\w+)")
       result = url_param.match(regexp)
       raise ApiError::InvalidShortenUrl if result.nil?
+
       result[1]
     end
 
