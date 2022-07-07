@@ -10,5 +10,7 @@ module ShortenerUrl
 
     config.eager_load_paths += ["#{config.root}/lib"]
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+
+    config.middleware.use Rack::Attack
   end
 end
