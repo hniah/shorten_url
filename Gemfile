@@ -14,7 +14,11 @@ gem 'bootsnap', '>= 1.4.4', require: false
 # Environment
 gem 'figaro'
 
+# Rack middleware
 gem 'rack-attack'
+
+# Database partition
+gem 'pg_party'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

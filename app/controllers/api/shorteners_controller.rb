@@ -8,7 +8,8 @@ module Api
     end
 
     def decode
-      shorten_url = ShortenUrl.find_by!(slug: parse_slug)
+      shorten_url = ShortenUrl.find_by_slug(parse_slug)
+      raise ApiError::NotFound if shorten_url.nil?
       render_json(data: ShortenUrlSerializer.new(shorten_url))
     end
 
