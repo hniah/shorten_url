@@ -26,6 +26,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'factory_bot_rails'
+  gem 'faker'
 
   # show error better
   gem 'better_errors'

@@ -13,7 +13,7 @@ describe Api::ShortenersController, type: :controller do
     end
 
     context 'With a valid url' do
-      let(:original_url) { 'https://guides.rubyonrails.org/active_record_basics.html#the-active-record-pattern' }
+      let(:original_url) { Faker::Internet.url }
 
       it 'is success' do
         do_request(original_url)

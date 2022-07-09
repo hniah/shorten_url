@@ -1,7 +1,7 @@
-class Rack::Attack
-  cache.store = ActiveSupport::Cache::MemoryStore.new
+Rack::Attack.enabled = ENV['ENABLE_RACK_ATTACK'] == 'true' || Rails.env.production?
+Rack::Attack.cache.store = ActiveSupport::Cache::MemoryStore.new
 
-  throttle('req/ip', limit: 5, period: 1.minute) do |req|
-    req.ip
-  end
+Rack::Attack.throttle('req/ip/api/encode-tries', limit: 10, period: 1.minute) do |req|
+  req.ip if req.path.include?('/encode') && req.post?
 end
+
