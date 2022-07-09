@@ -20,13 +20,16 @@ gem 'rack-attack'
 # Database partition
 gem 'pg_party'
 
+# Seed
+gem 'seedbank'
+gem 'faker'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'factory_bot_rails'
-  gem 'faker'
 
   # show error better
   gem 'better_errors'
