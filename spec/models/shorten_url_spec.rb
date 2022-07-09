@@ -10,7 +10,7 @@ RSpec.describe ShortenUrl, type: :model do
   describe 'get_by_slug' do
     let(:shorten_url) { create :shorten_url }
 
-    it 'returns active_record' do
+    it 'returns matched shorten_url' do
       record = described_class.get_by_slug(shorten_url.slug)
       expect(record).not_to be_nil
     end
