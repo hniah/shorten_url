@@ -7,6 +7,7 @@ module ApiError
     def initialize(error_code, message)
       @error_code = error_code
       @message = message
+      super
     end
   end
 

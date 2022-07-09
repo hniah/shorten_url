@@ -45,5 +45,6 @@ Lint/UnusedMethodArgument:
   Enabled: true
   AutoCorrect: false
 
-Documentation:
+Style/Documentation:
   Enabled: false
+

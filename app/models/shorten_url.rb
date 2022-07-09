@@ -5,10 +5,10 @@ class ShortenUrl < ApplicationRecord
   list_partition_by :part
 
   ALPHA_NUMBER = [*('a'..'z'), *('A'..'Z'), *('0'..'9')].freeze
-  SLUG_LENGTH = 6.freeze
+  SLUG_LENGTH = 6
 
-  validates :original_url, presence: true, format: URI::DEFAULT_PARSER.make_regexp(%w[http https])
-  validates_length_of :original_url, maximum: 500, on: :create, message: "url too long"
+  validates :original_url, length: { minimum: 15, maximum: 2048 },
+                           format: URI::DEFAULT_PARSER.make_regexp(%w[http https])
 
   before_create :generate_slug
 
@@ -16,8 +16,9 @@ class ShortenUrl < ApplicationRecord
     Rails.application.routes.url_helpers.short_url(slug: slug)
   end
 
-  def self.find_by_slug(key)
+  def self.get_by_slug(key)
     return nil if key.blank?
+
     where(part: key.chars[0].downcase).find_by(slug: key)
   end
 
@@ -30,11 +31,10 @@ class ShortenUrl < ApplicationRecord
   end
 
   def slug_existed?
-    self.class.where(part: slug_part, slug: self.slug).exists?
+    self.class.exists?(part: slug_part, slug: slug)
   end
 
   def slug_part
-    self.slug.chars[0].downcase
+    slug.chars[0].downcase
   end
 end
-
