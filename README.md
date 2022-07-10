@@ -50,7 +50,8 @@ Related files:
 
 #### Table Partitioning
 The app can have a lot of links which can make the query's cost so high. So I have split them into small chunks:
-**Table shorten_urls**: Split based on part, total of 33 partitions. eg:
+
+**Table shorten_urls**: Split based on part, total of 36 partitions. eg:
 - Partition **urls_start_a** contains records which has first character of **slug** in [a,A]
 - Partition **urls_start_b** contains records which has first character of **slug** in [b,B]
 - ...
