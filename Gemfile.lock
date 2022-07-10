@@ -52,6 +52,9 @@ GEM
     activerecord (6.1.5.1)
       activemodel (= 6.1.5.1)
       activesupport (= 6.1.5.1)
+    activerecord-analyze (0.10.1)
+      activerecord (>= 5.1.0)
+      railties (>= 5.1.0)
     activestorage (6.1.5.1)
       actionpack (= 6.1.5.1)
       activejob (= 6.1.5.1)
@@ -294,6 +297,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
+  activerecord-analyze
   better_errors
   binding_of_caller
   bootsnap (>= 1.4.4)
