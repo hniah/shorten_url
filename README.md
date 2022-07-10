@@ -57,7 +57,7 @@ The app can have a lot of links which can make the query's cost so high. So I ha
 - ...
 - Partition **urls_start_9** contains records which has first character of **slug** is 9
 
-This can speed up queries on `part`. Instead of `Seq scan` every single record, PG will do scan on the specific partition. So `Execution Time` will be lower.
+This can speed up queries on `part`. PG will do scan on the specific partition. So `Execution Time` will be lower.
 ![img](https://i.ibb.co/6PTNCCW/Screen-Shot-2022-07-10-at-10-31-59.png)
 
 Related files:
