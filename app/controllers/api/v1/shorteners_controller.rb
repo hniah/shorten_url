@@ -5,14 +5,14 @@ module Api
     class ShortenersController < BaseController
       def encode
         shorten_url = ShortenUrl.create!(original_url: url_param)
-        render_json(data: Sv1::ShortenUrlSerializer.new(shorten_url))
+        render_json(data: ::V1::ShortenUrlSerializer.new(shorten_url))
       end
 
       def decode
         shorten_url = ShortenUrl.get_by_slug(slug_param)
         raise ApiError::NotFound if shorten_url.nil?
 
-        render_json(data: Sv1::ShortenUrlSerializer.new(shorten_url))
+        render_json(data: ::V1::ShortenUrlSerializer.new(shorten_url))
       end
 
       private

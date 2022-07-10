@@ -46,13 +46,14 @@ Access [http://localhost:3000](http://localhost:3000)
 Related files:
 - [app/models/shorten_url.rb](https://github.com/hniah/shorten_url/blob/master/app/models/shorten_url.rb#L10,L11)
 - [app/config/initializers/rack-attack.rb](https://github.com/hniah/shorten_url/blob/master/config/initializers/rack-attack.rb#L4,L6)
+- [spec/requests/rack_attack_spec.rb](https://github.com/hniah/shorten_url/blob/master/spec/requests/rack_attack_spec.rb)
 
 #### Table Partitioning
 The app can have a lot of links which can make the query's cost so high. So I have split them into small chunks:
 **Table shorten_urls**: Split based on part, total of 33 partitions. eg:
 - Partition **urls_start_a** contains records which has first character of **slug** in [a,A]
 - Partition **urls_start_b** contains records which has first character of **slug** in [b,B]
-...
+- ...
 - Partition **urls_start_9** contains records which has first character of **slug** is 9
 
 This can speed up queries on `part`. Instead of `Seq scan` every single record, PG will do scan on the specific partition. So `Execution Time` will be lower.
