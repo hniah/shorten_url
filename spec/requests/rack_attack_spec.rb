@@ -22,12 +22,14 @@ RSpec.describe 'Rack::Attack.throttle - req/ip/api/encode-tries', type: :request
     end
 
     context 'with userA make more than 10 request in 1 minute' do
-      def usera_cannot_do_more_than_ten_request
+      def usera_can_do_ten_request
         10.times do
           do_request(usera_headers)
           expect(response).to have_http_status(:ok)
         end
+      end
 
+      def usera_cannot_do_another_request
         do_request(usera_headers)
         expect(response.body).to include('Retry later')
         expect(response).to have_http_status(:too_many_requests)
@@ -45,8 +47,9 @@ RSpec.describe 'Rack::Attack.throttle - req/ip/api/encode-tries', type: :request
         end
       end
 
-      it 'block the userA' do 
-        usera_cannot_do_more_than_ten_request
+      it 'block the userA' do
+        usera_can_do_ten_request
+        usera_cannot_do_another_request
         userb_can_do_a_request
         usera_can_request_again_after_one_minute
       end

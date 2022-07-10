@@ -4,7 +4,7 @@ Rails.application.routes.draw do
       resource :shortener, only:[] do
         collection do
           post :encode
-          post :decode
+          get :decode
         end
       end
     end

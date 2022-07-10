@@ -5,9 +5,9 @@ module ApiError
     attr_reader :message, :error_code
 
     def initialize(error_code, message)
+      super(nil)
       @error_code = error_code
       @message = message
-      super
     end
   end
 

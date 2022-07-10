@@ -1,8 +1,10 @@
-ActiveRecord::Base.connection.execute("TRUNCATE shorten_urls RESTART IDENTITY CASCADE")
-puts "==== Create ShortUrls ===="
+# frozen_string_literal: true
+
+ActiveRecord::Base.connection.execute('TRUNCATE shorten_urls RESTART IDENTITY CASCADE')
+Rails.logger.debug '==== Create ShortUrls ===='
 ShortenUrl.transaction do
-  (1..1000).each do |i|
+  (1..1000).each do |_i|
     ShortenUrl.create(original_url: Faker::Internet.url)
   end
 end
-puts "==== End ===="
+Rails.logger.debug '==== End ===='

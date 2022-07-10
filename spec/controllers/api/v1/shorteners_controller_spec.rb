@@ -13,10 +13,10 @@ describe Api::V1::ShortenersController, type: :controller do
     end
 
     context 'with a valid url' do
-      let(:original_url) { Faker::Internet.url }
+      let(:url) { Faker::Internet.url }
 
       it 'is success' do
-        do_request(original_url)
+        do_request(url)
         result = JSON.parse(response.body).with_indifferent_access
         expect(result[:error_code]).to eq 0
       end
@@ -35,13 +35,13 @@ describe Api::V1::ShortenersController, type: :controller do
     let!(:shorten_url) { create :shorten_url }
 
     def do_request(url)
-      post :decode, params: { url: url }
+      get :decode, params: { url: url }
     end
 
     context 'with a valid url' do
       let(:url) { shorten_url.short_url }
 
-      it 'is success' do
+      it 'returns matched shorten_url' do
         do_request(url)
         result = JSON.parse(response.body).with_indifferent_access
         expect(result[:error_code]).to eq 0
